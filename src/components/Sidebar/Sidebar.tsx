@@ -1,11 +1,11 @@
-import { Home, Users, Package, LogOut, Menu } from "lucide-react";
+import { Home, Users, Package, LogOut } from "lucide-react";
 
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
-export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+export function Sidebar({ isOpen }: SidebarProps) {
   return (
     <aside
       className={`${
@@ -19,12 +19,6 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         ) : (
           <h1 className="text-xl font-bold text-blue-600">D</h1>
         )}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 rounded hover:bg-gray-100 transition"
-        >
-          <Menu className="w-5 h-5 text-gray-600" />
-        </button>
       </div>
 
       {/* Menu */}
