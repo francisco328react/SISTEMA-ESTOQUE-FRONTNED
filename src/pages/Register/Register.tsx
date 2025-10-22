@@ -6,8 +6,8 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [branch, setBranch] = useState("");
   const [role, setRole] = useState("estoquista");
+  const [branch, setBranch] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,35 +21,30 @@ export function Register() {
     const newUser = { name, email, password, role };
     console.log("Usuário cadastrado:", newUser);
 
-    // Aqui futuramente faremos a integração com a API
-    navigate("/login");
+    navigate("/");
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Lado esquerdo - cinza escuro */}
-      <div className="hidden md:flex w-1/2 bg-gray-800 items-center justify-center text-gray-200">
+    <div className="flex h-screen bg-gray-50">
+      {/* Lado esquerdo */}
+      <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center text-gray-700">
         <h1 className="text-3xl font-bold text-center px-8">
-          Crie sua conta e gerencie o sistema de estoque
+          Crie sua conta e gerencie o sistema
         </h1>
       </div>
 
-      {/* Lado direito - formulário */}
-      <div className="flex w-full md:w-1/2 items-center justify-center bg-gray-100 dark:bg-gray-900">
+      {/* Lado direito */}
+      <div className="flex w-full md:w-1/2 items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-11/12 max-w-sm"
+          className="bg-white shadow-md rounded-lg p-8 w-11/12 max-w-sm border border-gray-200"
         >
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
             Cadastro de Usuário
           </h2>
 
-          {/* Nome */}
           <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="name" className="block text-gray-700 mb-1">
               Nome
             </label>
             <input
@@ -58,17 +53,13 @@ export function Register() {
               placeholder="Digite seu nome completo"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
-          {/* E-mail */}
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="email" className="block text-gray-700 mb-1">
               E-mail
             </label>
             <input
@@ -77,17 +68,13 @@ export function Register() {
               placeholder="seuemail@empresa.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
-          {/* Senha */}
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="password" className="block text-gray-700 mb-1">
               Senha
             </label>
             <input
@@ -96,17 +83,13 @@ export function Register() {
               placeholder="Crie uma senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
-          {/* Confirmar Senha */}
           <div className="mb-4">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="confirmPassword" className="block text-gray-700 mb-1">
               Confirmar Senha
             </label>
             <input
@@ -115,50 +98,41 @@ export function Register() {
               placeholder="Repita a senha"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
-          {/* Tipo de filial */}
           <div className="mb-6">
-            <label
-              htmlFor="branch"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="branch" className="block text-gray-700 mb-1">
               Filial
             </label>
             <select
               id="branch"
               value={branch}
               onChange={(e) => setBranch(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {/* <option value="estoquista">Estoquista</option>
-              <option value="gerente">Gerente</option> */}
+              <option value="empilhatec">Empilhatec</option>
+              <option value="empilhacom">Empilhacom</option>
             </select>
           </div>
 
-          {/* Tipo de usuário */}
           <div className="mb-6">
-            <label
-              htmlFor="role"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="role" className="block text-gray-700 mb-1">
               Tipo de Usuário
             </label>
             <select
               id="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="estoquista">Estoquista</option>
               <option value="gerente">Gerente</option>
             </select>
           </div>
 
-          {/* Botão */}
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
@@ -166,9 +140,9 @@ export function Register() {
             Cadastrar
           </button>
 
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
+          <p className="text-center text-sm text-gray-600 mt-4">
             Já tem conta?{" "}
-            <a href="/" className="text-blue-500 hover:underline font-medium">
+            <a href="/" className="text-blue-600 hover:underline">
               Fazer login
             </a>
           </p>

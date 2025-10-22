@@ -6,75 +6,79 @@ export function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Aqui futuramente chamaremos a API de autenticação
-    if (email && password) {
-      console.log("Login efetuado com:", email);
+    // Simulação simples de autenticação
+    if (email === "admin@empresa.com" && password === "123456") {
       navigate("/dashboard");
+    } else {
+      alert("E-mail ou senha incorretos!");
     }
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Lado esquerdo (cinza escuro) */}
-      <div className="hidden md:flex w-1/2 bg-gray-800 items-center justify-center text-gray-200">
-        <h1 className="text-3xl font-bold">Sistema de Estoque</h1>
+    <div className="flex h-screen bg-gray-50">
+      {/* Lado esquerdo - cinza claro */}
+      <div className="hidden md:flex w-1/2 bg-gray-200 items-center justify-center">
+        <h1 className="text-3xl font-bold text-gray-700 text-center px-8">
+          Bem-vindo ao Sistema de Gestão
+        </h1>
       </div>
 
-      {/* Lado direito (formulário) */}
-      <div className="flex w-full md:w-1/2 items-center justify-center bg-gray-100 dark:bg-gray-900">
+      {/* Lado direito - formulário */}
+      <div className="flex w-full md:w-1/2 items-center justify-center">
         <form
-          onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-11/12 max-w-sm"
+          onSubmit={handleLogin}
+          className="bg-white shadow-md rounded-lg p-8 w-11/12 max-w-sm border border-gray-200"
         >
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
-            Login
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Acesso ao Sistema
           </h2>
 
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="email" className="block text-gray-700 mb-1">
               E-mail
             </label>
             <input
               id="email"
               type="email"
-              placeholder="seuemail@empresa.com"
+              placeholder="Digite seu e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
           <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 dark:text-gray-300 mb-1"
-            >
+            <label htmlFor="password" className="block text-gray-700 mb-1">
               Senha
             </label>
             <input
               id="password"
               type="password"
-              placeholder="••••••••"
+              placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition cursor-pointer"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
           >
             Entrar
           </button>
+
+          <p className="text-center text-sm text-gray-600 mt-4">
+            Não tem uma conta?{" "}
+            <a href="/register" className="text-blue-600 hover:underline">
+              Cadastre-se
+            </a>
+          </p>
         </form>
       </div>
     </div>

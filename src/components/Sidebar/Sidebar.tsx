@@ -1,41 +1,72 @@
-import { Home, Menu, ClipboardList, Settings } from "lucide-react";
-import { useState } from "react";
+import { Home, Users, Package, LogOut, Menu } from "lucide-react";
 
-export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
 
+export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   return (
-    <div
+    <aside
       className={`${
         isOpen ? "w-64" : "w-20"
-      } bg-gray-900 h-screen text-gray-100 transition-all duration-300 flex flex-col`}
+      } bg-white border-r border-gray-200 shadow-md transition-all duration-300 flex flex-col`}
     >
-      {/* Botão de abrir/fechar */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-4 text-gray-300 hover:text-white cursor-pointer"
-      >
-        <Menu size={24} />
-        {isOpen && <span className="text-lg font-semibold">Menu</span>}
-      </button>
+      {/* Cabeçalho */}
+      <div className="flex items-center justify-between p-4">
+        {isOpen ? (
+          <h1 className="text-xl font-bold text-blue-600">Dashboard</h1>
+        ) : (
+          <h1 className="text-xl font-bold text-blue-600">D</h1>
+        )}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-2 rounded hover:bg-gray-100 transition"
+        >
+          <Menu className="w-5 h-5 text-gray-600" />
+        </button>
+      </div>
 
-      {/* Itens do menu */}
-      <nav className="flex-1 mt-6">
+      {/* Menu */}
+      <nav className="flex-1 p-2">
         <ul className="space-y-2">
-          <li className="flex items-center gap-3 p-3 hover:bg-gray-800 cursor-pointer">
-            <Home size={20} />
-            {isOpen && <span>Início</span>}
+          <li>
+            <a
+              href="/dashboard"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
+            >
+              <Home className="w-5 h-5 text-blue-600" />
+              {isOpen && <span>Início</span>}
+            </a>
           </li>
-          <li className="flex items-center gap-3 p-3 hover:bg-gray-800 cursor-pointer">
-            <ClipboardList size={20} />
-            {isOpen && <span>Tarefas</span>}
+          <li>
+            <a
+              href="/usuarios"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
+            >
+              <Users className="w-5 h-5 text-blue-600" />
+              {isOpen && <span>Usuários</span>}
+            </a>
           </li>
-          <li className="flex items-center gap-3 p-3 hover:bg-gray-800 cursor-pointer">
-            <Settings size={20} />
-            {isOpen && <span>Configurações</span>}
+          <li>
+            <a
+              href="/produtos"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
+            >
+              <Package className="w-5 h-5 text-blue-600" />
+              {isOpen && <span>Produtos</span>}
+            </a>
           </li>
         </ul>
       </nav>
-    </div>
+
+      {/* Rodapé */}
+      <div className="p-4 border-t border-gray-200">
+        <button className="flex items-center gap-3 text-gray-600 hover:text-red-600 transition w-full">
+          <LogOut className="w-5 h-5" />
+          {isOpen && <span>Sair</span>}
+        </button>
+      </div>
+    </aside>
   );
 }
