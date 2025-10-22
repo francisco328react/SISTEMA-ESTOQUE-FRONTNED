@@ -15,9 +15,9 @@ export function Sidebar({ isOpen }: SidebarProps) {
       {/* Cabeçalho */}
       <div className="flex items-center justify-between p-4">
         {isOpen ? (
-          <h1 className="text-xl font-bold text-blue-600">Dashboard</h1>
+          <h1 className="text-xl font-bold text-blue-600">Empilhacom</h1>
         ) : (
-          <h1 className="text-xl font-bold text-blue-600">D</h1>
+          <h1 className="text-xl font-bold px-2 text-blue-600">E</h1>
         )}
       </div>
 
