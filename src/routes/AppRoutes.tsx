@@ -16,7 +16,6 @@ export function AppRoutes() {
 
                 {/* Dashboard principal com rotas aninhadas */}
                 <Route path="/dashboard" element={<Dashboard />}>
-                    {/* <Route path="home" element={<Home />} /> */}
                     <Route path="users" element={<Users />} />
                     {/* <Route path="products" element={<Products />} /> */}
                 </Route>
