@@ -27,7 +27,7 @@ export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, onSave })
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+    <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center">
       <div className="bg-white rounded-2xl p-6 w-[400px] shadow-xl">
         <h2 className="text-xl font-semibold mb-4">Cadastrar Usuário</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
