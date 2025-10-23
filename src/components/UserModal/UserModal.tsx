@@ -1,70 +1,31 @@
-import { useState } from "react";
+import { Register } from "../../pages/Register/Register";
+import { X } from "lucide-react"
 import type { User } from "../../types/User/User";
 
 interface UserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (user: User) => void;
+  onSave?: (user: User) => void;
 }
 
 export const UserModal: React.FC<UserModalProps> = ({ isOpen, onClose, onSave }) => {
-  const [name, setName] = useState("Francisco");
-  const [role, setRole] = useState("estoquista");
-
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newUser = {
-      id: Date.now(),
-      name,
-      role,
-      createdAt: new Date().toISOString(),
-      image: '../../assets/Perfil-2.jpg',
-    };
-    onSave(newUser);
-    onClose();
-  };
-
   return (
-    <div className="fixed inset-0 bg-opacity-30 flex items-center justify-center">
-      <div className="bg-white rounded-2xl p-6 w-[400px] shadow-xl">
-        <h2 className="text-xl font-semibold mb-4">Cadastrar Usuário</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input
-            type="text"
-            placeholder="Nome completo"
-            className="border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500"
+    <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+      <div className="bg-white rounded-2xl p-6 w-[400px] shadow-xl pointer-events-auto">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Cadastrar Usuário</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-900 font-bold cursor-pointer"
           >
-            <option value="gerente">Gerente</option>
-            <option value="estoquista">Estoquista</option>
-          </select>
+            <X size={20} />
+          </button>
+        </div>
 
-          <div className="flex justify-end gap-2 mt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-            >
-              Salvar
-            </button>
-          </div>
-        </form>
+        {/* Componente de cadastro */}
+        <Register isModal onSave={onSave}/>
       </div>
     </div>
   );

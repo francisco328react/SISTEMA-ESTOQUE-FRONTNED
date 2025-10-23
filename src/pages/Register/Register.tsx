@@ -4,12 +4,20 @@ import { Input } from "../../components/Input/Input";
 import { Select } from "../../components/Select/Select";
 import { Button } from "../../components/Button/Button";
 
-export function Register() {
+import type { User } from "../../types/User/User";
+
+interface RegisterProps {
+  isModal?: boolean;
+  onSave?: (user: User) => void;
+}
+
+export function Register({ isModal = false, onSave }: RegisterProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
+    branch: "",
     role: "estoquista",
   });
 
@@ -27,24 +35,32 @@ export function Register() {
       return;
     }
 
-    console.log("Usuário cadastrado:", formData);
-    navigate("/");
+    const newUser: User = {
+      id: Date.now(),
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      branch: formData.branch,
+      role: formData.role as "gerente" | "estoquista",
+      createdAt: new Date().toISOString(),
+      image: `https://ui-avatars.com/api/?name=${formData.name}`,
+    };
+
+    if (onSave) onSave(newUser);
+
+    console.log("Usuário cadastrado:", newUser);
+
+    if (!isModal) navigate("/");
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-50">
-      
-      {/* Lado direito */}
-      <div className="flex w-full md:w-1/2 items-center justify-center p-6">
+    <div className={`${isModal ? "" : "flex items-center justify-center h-screen bg-gray-50"}`}>
+      <div className={`flex ${isModal ? "" : "w-full md:w-1/2 items-center justify-center p-6"}`}>
         <form
           onSubmit={handleSubmit}
           className="bg-white w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8"
         >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            Cadastro de Usuário
-          </h2>
 
-          {/* Campo genérico */}
           <div className="space-y-4">
             <Input
               id="name"
@@ -55,7 +71,6 @@ export function Register() {
               onChange={handleChange}
               required
             />
-
             <Input
               id="email"
               label="E-mail"
@@ -65,7 +80,6 @@ export function Register() {
               onChange={handleChange}
               required
             />
-
             <Input
               id="password"
               label="Senha"
@@ -75,7 +89,6 @@ export function Register() {
               onChange={handleChange}
               required
             />
-
             <Input
               id="confirmPassword"
               label="Confirmar senha"
@@ -84,6 +97,17 @@ export function Register() {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
+            />
+
+            <Select
+              id="branch"
+              label="Filial"
+              value={formData.branch}
+              onChange={handleChange}
+              options={[
+                { value: "empilhatec", label: "Empilhatec" },
+                { value: "empilhacom", label: "Empilhacom" },
+              ]}
             />
 
             <Select
@@ -100,12 +124,14 @@ export function Register() {
 
           <Button text="Cadastrar" />
 
-          <p className="text-center text-sm text-gray-500 mt-4">
-            Já tem conta?{" "}
-            <a href="/" className="text-blue-600 hover:underline font-medium">
-              Fazer login
-            </a>
-          </p>
+          {!isModal && (
+            <p className="text-center text-sm text-gray-500 mt-4">
+              Já tem conta?{" "}
+              <a href="/" className="text-blue-600 hover:underline font-medium">
+                Fazer login
+              </a>
+            </p>
+          )}
         </form>
       </div>
     </div>
