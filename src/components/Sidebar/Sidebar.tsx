@@ -1,4 +1,5 @@
 import { Home, Users, Package, LogOut } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -6,6 +7,14 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen }: SidebarProps) {
+  const location = useLocation();
+
+  const menuItems = [
+    { name: "Início", icon: <Home className="w-5 h-5 text-blue-600" />, path: "/dashboard/home" },
+    { name: "Usuários", icon: <Users className="w-5 h-5 text-blue-600" />, path: "/dashboard/users" },
+    { name: "Produtos", icon: <Package className="w-5 h-5 text-blue-600" />, path: "/dashboard/products" },
+  ];
+
   return (
     <aside
       className={`${
@@ -24,33 +33,21 @@ export function Sidebar({ isOpen }: SidebarProps) {
       {/* Menu */}
       <nav className="flex-1 p-2">
         <ul className="space-y-2">
-          <li>
-            <a
-              href="/dashboard"
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
-            >
-              <Home className="w-5 h-5 text-blue-600" />
-              {isOpen && <span>Início</span>}
-            </a>
-          </li>
-          <li>
-            <a
-              href="/usuarios"
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
-            >
-              <Users className="w-5 h-5 text-blue-600" />
-              {isOpen && <span>Usuários</span>}
-            </a>
-          </li>
-          <li>
-            <a
-              href="/produtos"
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition"
-            >
-              <Package className="w-5 h-5 text-blue-600" />
-              {isOpen && <span>Produtos</span>}
-            </a>
-          </li>
+          {menuItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                to={item.path}
+                className={`flex items-center gap-3 p-3 rounded-lg font-medium transition ${
+                  location.pathname === item.path
+                    ? "bg-blue-100 text-blue-700"
+                    : "text-gray-700 hover:bg-blue-50"
+                }`}
+              >
+                {item.icon}
+                {isOpen && <span>{item.name}</span>}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
 

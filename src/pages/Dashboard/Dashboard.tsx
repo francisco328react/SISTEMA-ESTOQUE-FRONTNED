@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet } from 'react-router-dom'
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { Navbar } from "../../components/Navbar/Navbar";
 
@@ -13,12 +14,7 @@ export function Dashboard() {
         <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
         <main className="flex-1 p-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Painel Principal
-          </h1>
-          <p className="text-gray-600">
-            Bem-vindo ao sistema! Aqui você pode gerenciar usuários, produtos e muito mais.
-          </p>
+          <Outlet />
         </main>
       </div>
     </div>
