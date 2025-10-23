@@ -1,14 +1,15 @@
 interface ButtonProps {
   text: string;
+  type?: "button" | "submit";
+  onClick?: () => void;
 }
 
-export function Button({ text }: ButtonProps) {
-  return (
-    <button
-      type="submit"
-      className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition"
-    >
-      {text}
-    </button>
-  );
-}
+export const Button: React.FC<ButtonProps> = ({ text, type = "button", onClick }) => (
+  <button
+    type={type}
+    onClick={onClick}
+    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
+  >
+    {text}
+  </button>
+);
