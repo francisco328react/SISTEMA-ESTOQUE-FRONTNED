@@ -15,7 +15,7 @@ export function Navbar({ toggleSidebar }: NavbarProps) {
     <header className="flex items-center justify-between bg-white border-b border-gray-200 shadow-sm px-6 py-3">
       <button
         onClick={toggleSidebar}
-        className="p-2 rounded hover:bg-gray-100 transition cursor-pointer"
+        className="p-2 rounded hover:bg-gray-100 cursor-pointer transition"
         aria-label="Alternar menu"
       >
         <svg

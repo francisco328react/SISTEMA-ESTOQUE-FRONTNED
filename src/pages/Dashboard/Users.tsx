@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { UserModal } from "../../components/UserModal/UserModal";
+import { UserHeader } from "../../components/UserHeader/UserHeader";
+import { UserFilter } from "../../components/UserFilter/UserFilter";
+import { UserCard } from "../../components/UserCard/UserCard";
+import type { User } from "../../types/User/User";
 
-export interface User {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  createdAt: string;
-}
+export function Users() {
 
-export const Users = () => {
   const [users, setUsers] = useState<User[]>([
     {
       id: 1,
@@ -37,64 +34,31 @@ export const Users = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const handleAddUser = (newUser: User) => setUsers([...users, newUser]);
+  const handleAddUser = (newUser: User) => setUsers((prev) => [...prev, newUser]);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Usuários</h1>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded cursor-pointer"
-        >
-          + Novo Usuário
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-50 py-10 px-6">
+      <div className="max-w-6xl mx-auto">
+        <UserHeader onNewUser={() => setIsModalOpen(true)} />
 
-      <div className="flex gap-3 mb-5">
-        <input
-          type="text"
-          placeholder="Pesquisar usuário..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2 flex-1 focus:ring-2 focus:ring-blue-500"
+        <UserFilter
+          search={search}
+          setSearch={setSearch}
+          filter={filter}
+          setFilter={setFilter}
         />
 
-        <select
-          value={filter}
-          onChange={(e) =>
-            setFilter(e.target.value as "todos" | "gerente" | "estoquista")
-          }
-          className="border border-gray-300 rounded px-3 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="todos">Todos</option>
-          <option value="gerente">Gerente</option>
-          <option value="estoquista">Estoquista</option>
-        </select>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredUsers.map((user) => (
-          <div
-            key={user.id}
-            className="bg-white p-4 rounded-xl shadow hover:shadow-md transition"
-          >
-            <div className="flex items-center gap-3">
-              <img
-                src={user.image}
-                alt={user.name}
-                className="w-12 h-12 rounded-full border"
-              />
-              <div>
-                <h2 className="text-lg font-semibold">{user.name}</h2>
-                <p className="text-sm text-gray-500 capitalize">{user.role}</p>
-              </div>
-            </div>
-            <p className="text-xs text-gray-400 mt-2">
-              Criado em: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
-            </p>
+        {filteredUsers.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredUsers.map((user) => (
+              <UserCard key={user.id} user={user} />
+            ))}
           </div>
-        ))}
+        ) : (
+          <p className="text-center text-gray-500 mt-16 text-lg">
+            Nenhum usuário encontrado
+          </p>
+        )}
       </div>
 
       <UserModal

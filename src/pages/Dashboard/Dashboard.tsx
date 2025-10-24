@@ -13,7 +13,7 @@ export function Dashboard() {
       <div className="flex flex-col flex-1">
         <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1">
           <Outlet />
         </main>
       </div>

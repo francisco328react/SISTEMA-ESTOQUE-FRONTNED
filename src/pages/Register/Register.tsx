@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input/Input";
 import { Select } from "../../components/Select/Select";
 import { Button } from "../../components/Button/Button";
-
+import { AuthLayout } from "../../components/Auth/AuthLayout";
+import { AuthCard } from "../../components/Auth/AuthCard";
+import { FormSection } from "../../components/Auth/FormSection";
 import type { User } from "../../types/User/User";
 
 interface RegisterProps {
@@ -23,7 +25,9 @@ export function Register({ isModal = false, onSave }: RegisterProps) {
 
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -47,93 +51,56 @@ export function Register({ isModal = false, onSave }: RegisterProps) {
     };
 
     if (onSave) onSave(newUser);
-
-    console.log("Usuário cadastrado:", newUser);
-
     if (!isModal) navigate("/");
   };
 
+  // Se for modal, renderiza sem layout de tela cheia
+  if (isModal) {
+    return (
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8"
+      >
+        <FormSection>
+          <Input id="name" label="Nome" value={formData.name} onChange={handleChange} required />
+          <Input id="email" label="E-mail" type="email" value={formData.email} onChange={handleChange} required />
+          <Input id="password" label="Senha" type="password" value={formData.password} onChange={handleChange} required />
+          <Input id="confirmPassword" label="Confirmar senha" type="password" value={formData.confirmPassword} onChange={handleChange} required />
+          <Select id="branch" label="Filial" value={formData.branch} onChange={handleChange}
+            options={[{ value: "empilhatec", label: "Empilhatec" }, { value: "empilhacom", label: "Empilhacom" }]} />
+          <Select id="role" label="Tipo de usuário" value={formData.role} onChange={handleChange}
+            options={[{ value: "estoquista", label: "Estoquista" }, { value: "gerente", label: "Gerente" }]} />
+        </FormSection>
+        <Button text="Cadastrar" />
+      </form>
+    );
+  }
+
+  // Se for página normal
   return (
-    <div className={`${isModal ? "" : "flex items-center justify-center h-screen bg-gray-50"}`}>
-      <div className={`flex ${isModal ? "" : "w-full md:w-1/2 items-center justify-center p-6"}`}>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8"
-        >
-
-          <div className="space-y-4">
-            <Input
-              id="name"
-              label="Nome"
-              type="text"
-              placeholder="Digite seu nome completo"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              id="email"
-              label="E-mail"
-              type="email"
-              placeholder="seuemail@empresa.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              id="password"
-              label="Senha"
-              type="password"
-              placeholder="Crie uma senha"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              id="confirmPassword"
-              label="Confirmar senha"
-              type="password"
-              placeholder="Repita a senha"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-
-            <Select
-              id="branch"
-              label="Filial"
-              value={formData.branch}
-              onChange={handleChange}
-              options={[
-                { value: "empilhatec", label: "Empilhatec" },
-                { value: "empilhacom", label: "Empilhacom" },
-              ]}
-            />
-
-            <Select
-              id="role"
-              label="Tipo de usuário"
-              value={formData.role}
-              onChange={handleChange}
-              options={[
-                { value: "estoquista", label: "Estoquista" },
-                { value: "gerente", label: "Gerente" },
-              ]}
-            />
-          </div>
+    <AuthLayout title="Sistema de Gestão" subtitle="Cadastre um novo usuário">
+      <AuthCard title="Cadastro de Usuário">
+        <form onSubmit={handleSubmit}>
+          <FormSection>
+            <Input id="name" label="Nome" value={formData.name} onChange={handleChange} required />
+            <Input id="email" label="E-mail" type="email" value={formData.email} onChange={handleChange} required />
+            <Input id="password" label="Senha" type="password" value={formData.password} onChange={handleChange} required />
+            <Input id="confirmPassword" label="Confirmar senha" type="password" value={formData.confirmPassword} onChange={handleChange} required />
+            <Select id="branch" label="Filial" value={formData.branch} onChange={handleChange}
+              options={[{ value: "empilhatec", label: "Empilhatec" }, { value: "empilhacom", label: "Empilhacom" }]} />
+            <Select id="role" label="Tipo de usuário" value={formData.role} onChange={handleChange}
+              options={[{ value: "estoquista", label: "Estoquista" }, { value: "gerente", label: "Gerente" }]} />
+          </FormSection>
 
           <Button text="Cadastrar" />
-
-          {!isModal && (
-            <p className="text-center text-sm text-gray-500 mt-4">
-              Já tem conta?{" "}
-              <a href="/" className="text-blue-600 hover:underline font-medium">
-                Fazer login
-              </a>
-            </p>
-          )}
+          <p className="text-center text-sm text-gray-500 mt-4">
+            Já tem conta?{" "}
+            <a href="/" className="text-blue-600 hover:underline font-medium">
+              Fazer login
+            </a>
+          </p>
         </form>
-      </div>
-    </div>
+      </AuthCard>
+    </AuthLayout>
   );
 }
