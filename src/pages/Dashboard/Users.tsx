@@ -2,15 +2,17 @@ import { useState } from "react";
 import { UserModal } from "../../components/UserModal/UserModal";
 import { UserHeader } from "../../components/UserHeader/UserHeader";
 import { UserFilter } from "../../components/UserFilter/UserFilter";
-import { UserCard } from "../../components/UserCard/UserCard";
+
 import type { User } from "../../types/User/User";
 
 export function Users() {
-
   const [users, setUsers] = useState<User[]>([
     {
       id: 1,
       name: "Carlos Souza",
+      email: "carlos@email.com",
+      password: "123456",
+      branch: "Empilhacom",
       role: "gerente",
       image: "https://ui-avatars.com/api/?name=Carlos+Souza",
       createdAt: "2025-10-15T10:30:00",
@@ -18,6 +20,9 @@ export function Users() {
     {
       id: 2,
       name: "Ana Lima",
+      email: "ana@email.com",
+      password: "654321",
+      branch: "Empilhacom",
       role: "estoquista",
       image: "https://ui-avatars.com/api/?name=Ana+Lima",
       createdAt: "2025-10-16T09:15:00",
@@ -48,17 +53,56 @@ export function Users() {
           setFilter={setFilter}
         />
 
-        {filteredUsers.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredUsers.map((user) => (
-              <UserCard key={user.id} user={user} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-500 mt-16 text-lg">
-            Nenhum usuário encontrado
-          </p>
-        )}
+        {/* Lista de usuários */}
+        <div className="mt-6 bg-white rounded-xl shadow overflow-hidden border border-gray-200">
+          <table className="w-full text-left border-collapse">
+            <thead className="bg-gray-100 text-gray-700 text-sm uppercase">
+              <tr>
+                <th className="px-6 py-3 font-semibold">Usuário</th>
+                <th className="px-6 py-3 font-semibold">Cargo</th>
+                <th className="px-6 py-3 font-semibold">E-mail</th>
+                <th className="px-6 py-3 font-semibold text-center">Criado em</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.length > 0 ? (
+                filteredUsers.map((user) => (
+                  <tr
+                    key={user.id}
+                    className="border-t hover:bg-gray-50 transition"
+                  >
+                    <td className="px-6 py-4 flex items-center gap-3">
+                      <img
+                        src={user.image}
+                        alt={user.name}
+                        className="w-10 h-10 rounded-full border"
+                      />
+                      <div>
+                        <p className="font-medium text-gray-800">{user.name}</p>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 capitalize text-gray-600">
+                      {user.role}
+                    </td>
+                    <td className="px-6 py-4 text-gray-600">{user.email}</td>
+                    <td className="px-6 py-4 text-center text-gray-500 text-sm">
+                      {new Date(user.createdAt).toLocaleDateString("pt-BR")}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className="text-center py-10 text-gray-500 text-lg"
+                  >
+                    Nenhum usuário encontrado
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <UserModal
@@ -68,4 +112,4 @@ export function Users() {
       />
     </div>
   );
-};
+}
