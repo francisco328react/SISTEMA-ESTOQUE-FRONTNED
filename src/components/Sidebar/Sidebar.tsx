@@ -1,5 +1,5 @@
 import { Users, Package, LogOut } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -8,11 +8,21 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     { name: "Usuários", icon: <Users className="w-5 h-5 text-blue-600" />, path: "/dashboard/users" },
     { name: "Produtos", icon: <Package className="w-5 h-5 text-blue-600" />, path: "/dashboard/products" },
   ];
+
+  const handleLogout = () => {
+    // Exemplo: limpar dados de login se estiverem salvos no localStorage
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userData");
+
+    // Redirecionar para a página de login
+    navigate("/login");
+  };
 
   return (
     <aside
@@ -52,7 +62,10 @@ export function Sidebar({ isOpen }: SidebarProps) {
 
       {/* Rodapé */}
       <div className="p-4 border-t border-gray-200">
-        <button className="flex items-center gap-3 text-gray-600 hover:text-red-600 transition w-full cursor-pointer">
+        <button 
+          className="flex items-center gap-3 text-gray-600 hover:text-red-600 transition w-full cursor-pointer"
+          onClick={handleLogout}
+        >
           <LogOut className="w-5 h-5" />
           {isOpen && <span>Sair</span>}
         </button>
