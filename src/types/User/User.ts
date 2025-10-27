@@ -4,7 +4,7 @@ export interface User {
   email?: string;
   password?: string;
   branch: string;
-  role: "gerente" | "estoquista";
+  role: string;
   image: string;
   createdAt: string;
 }
