@@ -6,28 +6,7 @@ import { Button } from "../../components/Button/Button";
 import type { User } from "../../types/User/User";
 
 export function Users() {
-  const [users, setUsers] = useState<User[]>([
-    {
-      id: 1,
-      name: "Carlos Souza",
-      email: "carlos@email.com",
-      password: "123456",
-      branch: "Empilhacom",
-      role: "gerente",
-      image: "https://ui-avatars.com/api/?name=Carlos+Souza",
-      createdAt: "2025-10-15T10:30:00",
-    },
-    {
-      id: 2,
-      name: "Ana Lima",
-      email: "ana@email.com",
-      password: "654321",
-      branch: "Empilhacom",
-      role: "estoquista",
-      image: "https://ui-avatars.com/api/?name=Ana+Lima",
-      createdAt: "2025-10-16T09:15:00",
-    },
-  ]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"todos" | "gerente" | "estoquista">("todos");
@@ -43,7 +22,7 @@ export function Users() {
 
   // --- Adicionar novo usuário ---
   const handleAddUser = (newUser: User) => {
-    setUsers((prev) => [...prev, { ...newUser, id: Date.now() }]);
+    setUsers((prev) => [...prev, newUser ]);
   };
 
   // --- Editar usuário existente ---
@@ -159,9 +138,14 @@ export function Users() {
       <UserModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSave={(user) =>
-          editingUser ? handleEditUser(user) : handleAddUser(user)
-        }
+        onSave={(user) => {
+          if (editingUser) {
+            handleEditUser(user);
+          } else {
+            handleAddUser(user);
+          }
+          closeModal(); // garante que o modal sempre feche após salvar
+        }}
         initialData={editingUser || undefined}
       />
     </div>
