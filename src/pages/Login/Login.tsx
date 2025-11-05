@@ -13,7 +13,7 @@ export function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email === "admin@empresa.com" && password === "123456") {
+    if (email === "admin@empresa.com" && password === "silveira33@") {
       navigate("/dashboard");
     } else {
       alert("E-mail ou senha incorretos!");
@@ -31,6 +31,7 @@ export function Login() {
         <Input
           id="email"
           label="E-mail"
+          name="email"
           type="email"
           placeholder="Digite seu e-mail"
           value={email}
@@ -39,6 +40,7 @@ export function Login() {
         />
         <Input
           id="password"
+          name="password"
           label="Senha"
           type="password"
           placeholder="Digite sua senha"
@@ -46,7 +48,7 @@ export function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button type="submit" text="Entrar" onClick={() => handleLogin} />
+        <Button variant="primary" type="submit" text="Entrar" onClick={handleLogin} />
       </FormContainer>
     </div>
   );
