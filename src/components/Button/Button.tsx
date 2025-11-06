@@ -1,7 +1,7 @@
 interface ButtonProps {
   text: string;
   type?: "button" | "submit";
-  onClick?: () => void;
+  onClick: (e: React.FormEvent) => void;
   children?: React.ReactNode;
   variant: string;
 }
