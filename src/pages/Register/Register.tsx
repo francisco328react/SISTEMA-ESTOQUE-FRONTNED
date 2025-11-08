@@ -62,16 +62,67 @@ export function Register({ isModal = false, onSave }: RegisterProps) {
         className="bg-white w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8"
       >
         <FormSection>
-          <Input id="name" label="Nome" value={formData.name} onChange={handleChange} required />
-          <Input id="email" label="E-mail" type="email" value={formData.email} onChange={handleChange} required />
-          <Input id="password" label="Senha" type="password" value={formData.password} onChange={handleChange} required />
-          <Input id="confirmPassword" label="Confirmar senha" type="password" value={formData.confirmPassword} onChange={handleChange} required />
-          <Select id="branch" label="Filial" value={formData.branch} onChange={handleChange}
-            options={[{ value: "empilhatec", label: "Empilhatec" }, { value: "empilhacom", label: "Empilhacom" }]} />
-          <Select id="role" label="Tipo de usuário" value={formData.role} onChange={handleChange}
-            options={[{ value: "estoquista", label: "Estoquista" }, { value: "gerente", label: "Gerente" }]} />
+          <Input
+            id="name"
+            name="name"
+            label="Nome"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            id="email"
+            name="email"
+            label="E-mail"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            id="password"
+            name="password"
+            label="Senha"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirmar senha"
+            type="password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <Select
+            id="branch"
+            name="branch"
+            label="Filial"
+            value={formData.branch}
+            onChange={handleChange}
+            options={[
+              { value: "Selecione", label: "..." },
+              { value: "empilhatec", label: "Empilhatec" },
+              { value: "empilhacom", label: "Empilhacom" },
+            ]}
+          />
+          <Select
+            id="role"
+            name="role"
+            label="Tipo de usuário"
+            value={formData.role}
+            onChange={handleChange}
+            options={[
+              { value: "Selecione", label: "..." },
+              { value: "estoquista", label: "Estoquista" },
+              { value: "gerente", label: "Gerente" },
+            ]}
+          />
         </FormSection>
-        <Button text="Cadastrar" />
+        <Button text="Cadastrar" variant="primary" />
       </form>
     );
   }
@@ -82,17 +133,68 @@ export function Register({ isModal = false, onSave }: RegisterProps) {
       <AuthCard title="Cadastro de Usuário">
         <form onSubmit={handleSubmit}>
           <FormSection>
-            <Input id="name" label="Nome" value={formData.name} onChange={handleChange} required />
-            <Input id="email" label="E-mail" type="email" value={formData.email} onChange={handleChange} required />
-            <Input id="password" label="Senha" type="password" value={formData.password} onChange={handleChange} required />
-            <Input id="confirmPassword" label="Confirmar senha" type="password" value={formData.confirmPassword} onChange={handleChange} required />
-            <Select id="branch" label="Filial" value={formData.branch} onChange={handleChange}
-              options={[{ value: "empilhatec", label: "Empilhatec" }, { value: "empilhacom", label: "Empilhacom" }]} />
-            <Select id="role" label="Tipo de usuário" value={formData.role} onChange={handleChange}
-              options={[{ value: "estoquista", label: "Estoquista" }, { value: "gerente", label: "Gerente" }]} />
+            <Input
+              id="name"
+              name="name"
+              label="Nome"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              id="email"
+              name="email"
+              label="E-mail"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              id="password"
+              name="password"
+              label="Senha"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              id="confirmPassword"
+              name="confirmPassword"
+              label="Confirmar senha"
+              type="password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <Select
+              id="branch"
+              name="branch"
+              label="Filial"
+              value={formData.branch}
+              onChange={handleChange}
+              options={[
+                { value: "Selecione", label: "..." },
+                { value: "empilhatec", label: "Empilhatec" },
+                { value: "empilhacom", label: "Empilhacom" },
+              ]}
+            />
+            <Select
+              id="role"
+              name="role"
+              label="Tipo de usuário"
+              value={formData.role}
+              onChange={handleChange}
+              options={[
+                { value: "Selecione", label: "..." },
+                { value: "estoquista", label: "Estoquista" },
+                { value: "gerente", label: "Gerente" },
+              ]}
+            />
           </FormSection>
 
-          <Button text="Cadastrar" />
+          <Button text="Cadastrar" variant="primary" />
           <p className="text-center text-sm text-gray-500 mt-4">
             Já tem conta?{" "}
             <a href="/" className="text-blue-600 hover:underline font-medium">

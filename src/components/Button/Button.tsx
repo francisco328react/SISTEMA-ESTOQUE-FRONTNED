@@ -1,9 +1,9 @@
 interface ButtonProps {
   text: string;
   type?: "button" | "submit";
-  onClick: (e: React.FormEvent) => void;
+  onClick?: (e: React.FormEvent) => void;
   children?: React.ReactNode;
-  variant: string;
+  variant?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({

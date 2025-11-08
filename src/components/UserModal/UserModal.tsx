@@ -38,7 +38,7 @@ export function UserModal({ isOpen, onClose, onSave, initialData }: UserModalPro
           email: "",
           password: "",
           branch: "",
-          role: "gerente",
+          role: "",
           image: "",
           createdAt: new Date().toISOString(),
         });
@@ -130,6 +130,7 @@ export function UserModal({ isOpen, onClose, onSave, initialData }: UserModalPro
               value={formData.branch}
               onChange={handleChange}
               options={[
+                { value: "", label: "Selecione" },
                 { label: "Empilhacom", value: "Empilhacom" },
                 { label: "Empilhatec", value: "Empilhatec" },
               ]}
@@ -142,6 +143,7 @@ export function UserModal({ isOpen, onClose, onSave, initialData }: UserModalPro
               value={formData.role}
               onChange={handleChange}
               options={[
+                { value: "...", label: "Selecione" },
                 { label: "Gerente", value: "gerente" },
                 { label: "Estoquista", value: "estoquista" },
               ]}
