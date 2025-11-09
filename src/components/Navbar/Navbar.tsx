@@ -1,8 +1,9 @@
+import { UserDropdown } from "../UserDropDown/UserDropDown";
+import perfil from "../../assets/Perfil-2.jpg";
+
 interface NavbarProps {
   toggleSidebar: () => void;
 }
-
-import perfil from '../../assets/Perfil-2.jpg'
 
 export function Navbar({ toggleSidebar }: NavbarProps) {
   const user = {
@@ -30,17 +31,7 @@ export function Navbar({ toggleSidebar }: NavbarProps) {
         </svg>
       </button>
 
-      <div className="flex items-center gap-3">
-        <div className="text-right">
-          <p className="text-gray-800 font-semibold text-sm">{user.name}</p>
-          <p className="text-gray-500 text-xs">{user.role}</p>
-        </div>
-        <img
-          src={user.avatar}
-          alt={user.name}
-          className="w-10 h-10 rounded-full border border-gray-300"
-        />
-      </div>
+      <UserDropdown user={user} />
     </header>
   );
 }

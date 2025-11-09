@@ -1,9 +1,10 @@
 interface ButtonProps {
-  text: string;
+  text?: string;
   type?: "button" | "submit";
-  onClick?: (e: React.FormEvent) => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
-  variant?: string;
+  variant?: "primary" | "secondary" | "danger" | "ghost";
+  className?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -11,19 +12,26 @@ export const Button: React.FC<ButtonProps> = ({
   type = "button",
   onClick,
   children,
-  variant,
-}) => (
-  <button
-    type={type}
-    onClick={onClick} // <-- ESSENCIAL: precisa estar aqui
-    className={`w-full ${
-      variant === "primary"
-        ? "bg-blue-600 hover:bg-blue-700 text-white"
-        : variant === "secondary"
-        ? "bg-gray-300 hover:bg-gray-400 text-gray-800"
-        : "bg-red-600 hover:bg-red-700 text-white"
-    } py-2 rounded transition cursor-pointer`}
-  >
-    {children || text}
-  </button>
-);
+  variant = "primary",
+  className = "",
+}) => {
+  const baseStyle =
+    "w-full text-left px-4 py-2 text-sm rounded-md transition";
+
+  const variants = {
+    primary: "bg-blue-600 text-white hover:bg-blue-700",
+    secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
+    danger: "text-red-600 hover:bg-red-50",
+    ghost: "text-gray-700 hover:bg-gray-100",
+  };
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${baseStyle} ${variants[variant]} ${className}`}
+    >
+      {children || text}
+    </button>
+  );
+};
