@@ -1,10 +1,16 @@
+import React from "react";
+
 interface FormContainerProps {
   children: React.ReactNode;
+  onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-export const FormContainer: React.FC<FormContainerProps> = ({ children }) => (
+export const FormContainer: React.FC<FormContainerProps> = ({ children, onSubmit }) => (
   <div className="flex w-full md:w-1/2 items-center justify-center">
-    <form className="bg-white shadow-md rounded-lg p-8 w-11/12 max-w-sm border border-gray-200">
+    <form
+      onSubmit={onSubmit}
+      className="bg-white shadow-md rounded-lg p-8 w-11/12 max-w-sm border border-gray-200"
+    >
       {children}
     </form>
   </div>

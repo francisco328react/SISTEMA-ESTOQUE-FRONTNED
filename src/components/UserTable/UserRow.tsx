@@ -21,7 +21,7 @@ export function UserRow({ user, onEdit, onDelete }: UserRowProps) {
         </div>
       </td>
       <td className="px-6 py-4 capitalize text-gray-600">{user.role}</td>
-      <td className="px-6 py-4 text-gray-600">{user.branch}</td>
+      <td className="px-6 py-4 text-gray-600">{user.sector}</td>
       <td className="px-6 py-4 text-gray-600">{user.email}</td>
       <td className="px-6 py-4 text-center text-gray-500 text-sm">
         {new Date(user.createdAt).toLocaleDateString("pt-BR")}

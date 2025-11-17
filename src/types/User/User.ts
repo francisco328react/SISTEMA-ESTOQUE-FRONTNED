@@ -1,9 +1,9 @@
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  password: string;
-  branch: string;
+  password?: string;
+  sector: string;
   role: string;
   image: string;
   createdAt: string;

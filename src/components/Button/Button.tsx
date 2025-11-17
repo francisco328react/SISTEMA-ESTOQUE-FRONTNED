@@ -16,13 +16,13 @@ export const Button: React.FC<ButtonProps> = ({
   className = "",
 }) => {
   const baseStyle =
-    "w-full text-left px-4 py-2 text-sm rounded-md transition";
+    "w-full px-4 py-2 text-sm text-center rounded-md transition";
 
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
-    danger: "text-red-600 hover:bg-red-50",
-    ghost: "text-gray-700 hover:bg-gray-100",
+    primary: "bg-blue-600 text-center text-white hover:bg-blue-700 transition cursor-pointer",
+    secondary: "bg-gray-100 text-center text-gray-800 hover:bg-gray-200 transition cursor-pointer",
+    danger: "text-red-600 text-center hover:bg-red-50 transition cursor-pointer",
+    ghost: "text-gray-700 text-center hover:bg-gray-100 transition cursor-pointer",
   };
 
   return (
