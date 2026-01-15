@@ -5,7 +5,10 @@ interface FormContainerProps {
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-export const FormContainer: React.FC<FormContainerProps> = ({ children, onSubmit }) => (
+export const FormContainer: React.FC<FormContainerProps> = ({
+  children,
+  onSubmit,
+}) => (
   <div className="flex w-full md:w-1/2 items-center justify-center">
     <form
       onSubmit={onSubmit}

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Input } from "../../components/Input/Input";
 import { Button } from "../../components/Button/Button";
 import { FormContainer } from "../../components/FormContainer/FormContainer";
+import { Input } from "../../components/Input/Input";
 import { SideImage } from "../../components/SideImage/SideImage";
-import { loginUser } from '../../services/authService';
+import { loginUser } from "../../services/authService";
 
 export function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e:  React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -27,7 +27,7 @@ export function Login() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <SideImage title="Bem-vindo ao Sistema de Gestão" />
+      <SideImage title="Projeto Europa" />
 
       <FormContainer onSubmit={handleLogin}>
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
@@ -53,7 +53,11 @@ export function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button variant="primary" type="submit" text="Entrar" />
+        <Button
+          type="submit"
+          text="Entrar"
+          className="bg-primary-500 hover:bg-primary-600"
+        />
       </FormContainer>
     </div>
   );

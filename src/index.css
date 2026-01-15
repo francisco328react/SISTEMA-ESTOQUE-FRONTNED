@@ -1,7 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-    
+  /* Cor base primary (sem número = 500) */
+  --color-primary: #fd6904;
+  
+  /* Variações */
+  --color-primary-50: #fff5f0;
+  --color-primary-100: #ffe8d9;
+  --color-primary-200: #ffd1b3;
+  --color-primary-300: #ffb380;
+  --color-primary-400: #ff8533;
+  --color-primary-500: #fd6904;
+  --color-primary-600: #e55d03;
+  --color-primary-700: #c54f03;
+  --color-primary-800: #a04102;
+  --color-primary-900: #7a3202;
+  --color-primary-950: #4a1e01;
 }
 
 @keyframes fadeIn {
