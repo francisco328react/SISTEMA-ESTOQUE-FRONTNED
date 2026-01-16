@@ -56,7 +56,7 @@ export function Login() {
         <Button
           type="submit"
           text="Entrar"
-          className="bg-primary-500 hover:bg-primary-600"
+          className="bg-primary hover:bg-primary-400"
         />
       </FormContainer>
     </div>

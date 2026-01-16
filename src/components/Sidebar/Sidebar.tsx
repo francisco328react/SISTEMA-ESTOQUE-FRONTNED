@@ -1,4 +1,4 @@
-import { Users, Package } from "lucide-react";
+import { Package, Users } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 interface SidebarProps {
@@ -10,8 +10,16 @@ export function Sidebar({ isOpen }: SidebarProps) {
   const location = useLocation();
 
   const menuItems = [
-    { name: "Usuários", icon: <Users className="w-5 h-5 text-blue-600" />, path: "/dashboard/users" },
-    { name: "Produtos", icon: <Package className="w-5 h-5 text-blue-600" />, path: "/dashboard/products" },
+    {
+      name: "Usuários",
+      icon: <Users className="w-5 h-5 text-blue-600" />,
+      path: "/dashboard/users",
+    },
+    {
+      name: "Materiais",
+      icon: <Package className="w-5 h-5 text-blue-600" />,
+      path: "/dashboard/materials",
+    },
   ];
 
   return (
