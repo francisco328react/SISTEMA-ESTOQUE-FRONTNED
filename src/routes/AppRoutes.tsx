@@ -1,11 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { Dashboard } from "../pages/Dashboard/Dashboard";
 import { Login } from "../pages/Login/Login";
 
-import { Users } from "../pages/Dashboard/Users";
+import { Dashboard } from "../pages/Dashboard/Dashboard";
+import { DashboardHome } from "../pages/Dashboard/DashboardHome";
 import { Materials } from "../pages/Materials";
-import { MaterialForm } from "../pages/Materials/materialForm";
+import { MaterialForm } from "../pages/Materials/materialForm"; // ← Verifique se é MaterialForm ou materialForm
+import { Users } from "../pages/Users";
+import { UserForm } from "../pages/Users/UserForm";
 
 export function AppRoutes() {
   return (
@@ -14,16 +16,16 @@ export function AppRoutes() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Dashboard principal com rotas aninhadas */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="users" element={<Users />} />
+        {/* Dashboard é apenas o LAYOUT, não faz parte da URL */}
+        <Route element={<Dashboard />}>
+          <Route path="/home" element={<DashboardHome />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/new" element={<UserForm />} />
+          <Route path="/users/edit/:id" element={<UserForm />} />
 
-          {/* Rotas de Materiais */}
-          <Route path="materials" element={<Materials />} />
-          <Route path="materials/new" element={<MaterialForm />} />
-          <Route path="materials/edit/:id" element={<MaterialForm />} />
-
-          {/* <Route path="products" element={<Products />} /> */}
+          <Route path="/materials" element={<Materials />} />
+          <Route path="/materials/new" element={<MaterialForm />} />
+          <Route path="/materials/edit/:id" element={<MaterialForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

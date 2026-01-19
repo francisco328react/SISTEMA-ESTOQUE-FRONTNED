@@ -33,10 +33,10 @@ export const materialService = {
 
   // Buscar com filtros
   async search(filters: {
-    busca?: string;
-    estoque?: string;
-    fornecedor?: string;
-    estante?: string;
+    search?: string;
+    stock?: string;
+    supplier?: string;
+    shelf?: string;
   }): Promise<Material[]> {
     const response = await api.get("/materials/search", { params: filters });
     return response.data;
@@ -45,12 +45,12 @@ export const materialService = {
   // Ajustar quantidade (entrada/saída)
   async adjustQuantity(
     id: string,
-    quantidade: number,
-    tipo: "entrada" | "saida"
+    quantity: number,
+    type: "entrada" | "saida",
   ): Promise<Material> {
     const response = await api.patch(`/materials/${id}/adjust`, {
-      quantidade,
-      tipo,
+      quantity,
+      type,
     });
     return response.data;
   },

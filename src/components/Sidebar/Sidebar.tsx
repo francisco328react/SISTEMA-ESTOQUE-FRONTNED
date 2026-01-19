@@ -1,4 +1,4 @@
-import { Package, Users } from "lucide-react";
+import { LayoutDashboard, Package, Users } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 interface SidebarProps {
@@ -11,14 +11,19 @@ export function Sidebar({ isOpen }: SidebarProps) {
 
   const menuItems = [
     {
+      name: "Dashboard",
+      icon: <LayoutDashboard className="w-5 h-5 text-blue-600" />,
+      path: "/home",
+    },
+    {
       name: "Usuários",
       icon: <Users className="w-5 h-5 text-blue-600" />,
-      path: "/dashboard/users",
+      path: "/users",
     },
     {
       name: "Materiais",
       icon: <Package className="w-5 h-5 text-blue-600" />,
-      path: "/dashboard/materials",
+      path: "/materials",
     },
   ];
 
