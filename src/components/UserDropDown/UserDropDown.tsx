@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
+import { logoutUser } from "../../services/authService";
 
 interface UserDropdownProps {
   user: {
@@ -17,13 +18,18 @@ export function UserDropdown({ user }: UserDropdownProps) {
 
   const handleLogout = () => {
     // Aqui pode limpar localStorage, cookies, etc.
-    navigate("/");
+    logoutUser(); // 🔴 limpa o token
+    setOpen(false); // fecha o dropdown
+    navigate("/"); // ou "/login"
   };
 
   // Fecha o menu ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     };
@@ -62,9 +68,9 @@ export function UserDropdown({ user }: UserDropdownProps) {
       {open && (
         <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-200 rounded-xl shadow-lg z-50 animate-fadeIn">
           <div className="py-1">
-            <Button 
-              variant="danger" 
-              onClick={handleLogout} 
+            <Button
+              variant="danger"
+              onClick={handleLogout}
               className="cursor-pointer"
             >
               Sair

@@ -12,3 +12,7 @@ export async function loginUser(username: string, password: string): Promise<Log
 
   return response.data;
 }
+
+export function logoutUser() {
+  localStorage.removeItem("token");
+}
