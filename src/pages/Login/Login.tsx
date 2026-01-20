@@ -1,3 +1,5 @@
+import { Link } from "@heroui/react";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
@@ -5,8 +7,6 @@ import { FormContainer } from "../../components/FormContainer/FormContainer";
 import { Input } from "../../components/Input/Input";
 import { SideImage } from "../../components/SideImage/SideImage";
 import { loginUser } from "../../services/authService";
-import { Link } from "@heroui/react";
-import { Eye, EyeOff } from "lucide-react";
 
 export function Login() {
   const [username, setUserName] = useState("");
@@ -35,9 +35,7 @@ export function Login() {
       {/* FORM */}
       <FormContainer onSubmit={handleLogin}>
         <div className="space-y-1 py-6">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Olá, bem-vindo 👋
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900">Olá, bem-vindo</h2>
           <p className="text-sm text-gray-500">
             Entre com sua conta para continuar
           </p>
@@ -98,19 +96,6 @@ export function Login() {
           Não possui uma conta?{" "}
           <Link href="#" className="text-orange-500 font-medium">
             Solicitar acesso
-          </Link>
-        </p>
-
-        <hr className="border-gray-200" />
-
-        <p className="text-center text-xs text-gray-400 leading-relaxed py-6">
-          Ao continuar, você concorda com nossos{" "}
-          <Link href="#" className="text-orange-500">
-            Termos de Serviço
-          </Link>{" "}
-          e{" "}
-          <Link href="#" className="text-orange-500">
-            Política de Privacidade
           </Link>
         </p>
       </FormContainer>
