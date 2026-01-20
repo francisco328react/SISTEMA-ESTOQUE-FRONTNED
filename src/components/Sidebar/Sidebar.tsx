@@ -12,17 +12,17 @@ export function Sidebar({ isOpen }: SidebarProps) {
   const menuItems = [
     {
       name: "Dashboard",
-      icon: <LayoutDashboard className="w-5 h-5 var(--color-primary)" />,
+      icon: <LayoutDashboard className="w-5 h-5 text-primary-600" />,
       path: "/home",
     },
     {
       name: "Usuários",
-      icon: <Users className="w-5 h-5 var(--color-primary)" />,
+      icon: <Users className="w-5 h-5 text-primary-600" />,
       path: "/users",
     },
     {
       name: "Materiais",
-      icon: <Package className="w-5 h-5 var(--color-primary)" />,
+      icon: <Package className="w-5 h-5 text-primary-600" />,
       path: "/materials",
     },
   ];
@@ -33,30 +33,54 @@ export function Sidebar({ isOpen }: SidebarProps) {
         isOpen ? "w-64" : "w-20"
       } bg-white border-r border-gray-200 shadow-md transition-all duration-300 flex flex-col`}
     >
-      {/* Cabeçalho */}
-      <div className="flex items-center justify-between p-4">
-        {isOpen ? (
-          <h1 className="text-xl font-bold text-orange-500">Empilhacom</h1>
-        ) : (
-          <h1 className="text-xl font-bold px-2 text-orange-500">E</h1>
-        )}
+      {/* Cabeçalho com espaço maior e efeito slide */}
+      <div className="flex items-center justify-center p-6 h-24 overflow-hidden border-b border-gray-100">
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Logo completa - slide from left */}
+          <img
+            src="/europa-orange.svg"
+            alt="Europa"
+            className={`h-20 absolute transition-all duration-300 ${
+              isOpen
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-full opacity-0 pointer-events-none"
+            }`}
+          />
+
+          {/* Ícone - slide from right */}
+          <img
+            src="/europa-icon-orange.svg"
+            alt="Europa"
+            className={`w-12 h-12 absolute transition-all duration-300 ${
+              !isOpen
+                ? "translate-x-0 opacity-100"
+                : "translate-x-full opacity-0 pointer-events-none"
+            }`}
+          />
+        </div>
       </div>
 
       {/* Menu */}
-      <nav className="flex-1 p-2">
+      <nav className="flex-1 p-2 mt-2">
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <li key={item.name}>
               <Link
                 to={item.path}
-                className={`flex items-center gap-3 p-3 rounded-lg font-medium transition ${
+                className={`flex items-center ${
+                  isOpen ? "gap-3 justify-start" : "justify-center"
+                } p-3 rounded-lg font-medium transition-all duration-200 ${
                   location.pathname === item.path
-                    ? "bg-orange-100 text-orange-700"
-                    : "text-gray-700 hover:bg-orange-50"
+                    ? "bg-primary-100 text-primary-700"
+                    : "text-gray-700 hover:bg-primary-50"
                 }`}
               >
                 {item.icon}
-                {isOpen && <span>{item.name}</span>}
+                {isOpen && (
+                  <span className="transition-opacity duration-300">
+                    {item.name}
+                  </span>
+                )}
               </Link>
             </li>
           ))}
