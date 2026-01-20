@@ -18,7 +18,7 @@ export function Login() {
       const response = await loginUser(username, password);
 
       localStorage.setItem("token", response.token);
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
       console.error(error);
       alert("Credenciais inválidas!");
@@ -43,6 +43,7 @@ export function Login() {
           onChange={(e) => setUserName(e.target.value)}
           required
         />
+
         <Input
           id="password"
           name="password"
@@ -53,6 +54,7 @@ export function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        
         <Button
           type="submit"
           text="Entrar"

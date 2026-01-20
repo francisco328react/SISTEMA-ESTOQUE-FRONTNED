@@ -12,17 +12,17 @@ export function Sidebar({ isOpen }: SidebarProps) {
   const menuItems = [
     {
       name: "Dashboard",
-      icon: <LayoutDashboard className="w-5 h-5 text-blue-600" />,
+      icon: <LayoutDashboard className="w-5 h-5 var(--color-primary)" />,
       path: "/home",
     },
     {
       name: "Usuários",
-      icon: <Users className="w-5 h-5 text-blue-600" />,
+      icon: <Users className="w-5 h-5 var(--color-primary)" />,
       path: "/users",
     },
     {
       name: "Materiais",
-      icon: <Package className="w-5 h-5 text-blue-600" />,
+      icon: <Package className="w-5 h-5 var(--color-primary)" />,
       path: "/materials",
     },
   ];
@@ -36,9 +36,9 @@ export function Sidebar({ isOpen }: SidebarProps) {
       {/* Cabeçalho */}
       <div className="flex items-center justify-between p-4">
         {isOpen ? (
-          <h1 className="text-xl font-bold text-blue-600">Empilhacom</h1>
+          <h1 className="text-xl font-bold text-orange-500">Empilhacom</h1>
         ) : (
-          <h1 className="text-xl font-bold px-2 text-blue-600">E</h1>
+          <h1 className="text-xl font-bold px-2 text-orange-500">E</h1>
         )}
       </div>
 
@@ -51,8 +51,8 @@ export function Sidebar({ isOpen }: SidebarProps) {
                 to={item.path}
                 className={`flex items-center gap-3 p-3 rounded-lg font-medium transition ${
                   location.pathname === item.path
-                    ? "bg-blue-100 text-blue-700"
-                    : "text-gray-700 hover:bg-blue-50"
+                    ? "bg-orange-100 text-orange-700"
+                    : "text-gray-700 hover:bg-orange-50"
                 }`}
               >
                 {item.icon}

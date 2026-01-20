@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = ({
       value={value}
       aria-required
       onChange={onChange}
-      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-200"
       required={required}
     />
   </div>
