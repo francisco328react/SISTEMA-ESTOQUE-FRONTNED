@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type { MaterialFormData } from "../../interfaces/material";
 import { materialService } from "../../services/materialService";
+import { STOCK_CATEGORIES } from "../../types/Material/Material";
 
 export const MaterialForm: React.FC = () => {
   const navigate = useNavigate();
@@ -254,18 +255,23 @@ export const MaterialForm: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Estoque (Categoria)
+                Estoque
               </label>
-              <input
-                type="text"
+              <select
                 name="stock"
                 value={formData.stock}
                 onChange={handleChange}
-                placeholder="Ex: ELÉTRICA"
+                required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-              />
+              >
+                <option value="">Selecione...</option>
+                {STOCK_CATEGORIES.map((category) => (
+                  <option key={category.value} value={category.value}>
+                    {category.label}
+                  </option>
+                ))}
+              </select>
             </div>
-
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Estante

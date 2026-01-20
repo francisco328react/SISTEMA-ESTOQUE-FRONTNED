@@ -1,6 +1,7 @@
-import { Edit, Package, Search, Trash2 } from "lucide-react";
+import { Edit, Minus, Package, Search, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MaterialWithdrawModal } from "../../components/MaterialWithdrawModal/MaterialWithdrawModal";
 import type { Material } from "../../interfaces/material";
 import { materialService } from "../../services/materialService";
 
@@ -13,6 +14,12 @@ export const Materials: React.FC = () => {
   const [search, setSearch] = useState("");
   const [stockFilter, setStockFilter] = useState("");
   const [supplierFilter, setSupplierFilter] = useState("");
+
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(
+    null,
+  );
 
   useEffect(() => {
     loadMaterials();
@@ -65,7 +72,26 @@ export const Materials: React.FC = () => {
     return "text-gray-900";
   };
 
-  const handleDelete = async (id: string) => {
+  const handleOpenWithdrawModal = (material: Material) => {
+    setSelectedMaterial(material);
+    setIsModalOpen(true);
+  };
+
+  const handleWithdraw = async (materialId: string, quantity: number) => {
+    try {
+      // Aqui você pode usar o endpoint adjustQuantity do materialService
+      // ou criar um endpoint específico para retirada
+      await materialService.adjustQuantity(materialId, quantity, "saida");
+      alert(`${quantity} unidade(s) retirada(s) com sucesso!`);
+      loadMaterials(); // Recarregar lista
+    } catch (error) {
+      console.error("Erro ao retirar material:", error);
+      alert("Erro ao retirar material do estoque!");
+    }
+  };
+
+  const handleDelete = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita abrir o modal ao clicar em delete
     if (window.confirm("Tem certeza que deseja excluir este material?")) {
       try {
         await materialService.delete(id);
@@ -76,6 +102,11 @@ export const Materials: React.FC = () => {
         alert("Erro ao excluir material!");
       }
     }
+  };
+
+  const handleEdit = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita abrir o modal ao clicar em editar
+    navigate(`/materials/edit/${id}`);
   };
 
   if (loading) {
@@ -230,7 +261,8 @@ export const Materials: React.FC = () => {
                 filteredMaterials.map((material) => (
                   <tr
                     key={material.id}
-                    className="hover:bg-gray-50 transition-colors"
+                    onClick={() => handleOpenWithdrawModal(material)}
+                    className="hover:bg-primary-50 transition-colors cursor-pointer"
                   >
                     <td className="px-4 py-3 text-sm text-gray-900">
                       {material.reference || "-"}
@@ -261,25 +293,26 @@ export const Materials: React.FC = () => {
                     </td>
                     <td className="px-4 py-3 text-center">
                       <div className="flex items-center justify-center gap-2">
-                        {/* <button
-                          onClick={() => navigate(`/materials/${material.id}`)}
-                          className="text-blue-600 hover:text-blue-800 transition"
-                          title="Ver detalhes"
-                        >
-                          <Eye className="w-5 h-5" />
-                        </button> */}
                         <button
-                          onClick={() =>
-                            navigate(`/materials/edit/${material.id}`)
-                          }
-                          className="text-primary-600 hover:text-primary-800 transition"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenWithdrawModal(material);
+                          }}
+                          className="text-primary-600 hover:text-primary-800 transition p-1"
+                          title="Retirar do estoque"
+                        >
+                          <Minus className="w-5 h-5" />
+                        </button>
+                        <button
+                          onClick={(e) => handleEdit(material.id, e)}
+                          className="text-gray-600 hover:text-gray-800 transition p-1"
                           title="Editar"
                         >
                           <Edit className="w-5 h-5" />
                         </button>
                         <button
-                          onClick={() => handleDelete(material.id)}
-                          className="text-red-600 hover:text-red-800 transition"
+                          onClick={(e) => handleDelete(material.id, e)}
+                          className="text-red-600 hover:text-red-800 transition p-1"
                           title="Excluir"
                         >
                           <Trash2 className="w-5 h-5" />
@@ -293,6 +326,14 @@ export const Materials: React.FC = () => {
           </table>
         </div>
       </div>
+
+      {/* Modal de Retirada */}
+      <MaterialWithdrawModal
+        material={selectedMaterial}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleWithdraw}
+      />
     </div>
   );
 };
