@@ -115,7 +115,8 @@ export const UserForm: React.FC = () => {
         await userService.create(dataToSend);
         alert("Usuário cadastrado com sucesso!");
       }
-      navigate("/dashboard/users");
+      navigate("/users");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Erro ao salvar usuário:", error);
       alert(error.response?.data?.message || "Erro ao salvar usuário!");
@@ -136,7 +137,7 @@ export const UserForm: React.FC = () => {
     <div className="p-6 max-w-3xl mx-auto">
       <div className="mb-6">
         <button
-          onClick={() => navigate("/dashboard/users")}
+          onClick={() => navigate("/users")}
           className="text-primary-600 hover:text-primary-700 flex items-center gap-2 mb-4 transition"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -317,7 +318,7 @@ export const UserForm: React.FC = () => {
         <div className="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
           <button
             type="button"
-            onClick={() => navigate("/dashboard/users")}
+            onClick={() => navigate("/users")}
             className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold"
           >
             Cancelar
@@ -325,6 +326,7 @@ export const UserForm: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
+            onClick={() => navigate("/users")}
             className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg"
           >
             <Save className="w-5 h-5" />

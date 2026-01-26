@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userService } from "../../services/userService";
 import type { User } from "../../types/User/User";
-import { SECTORS, SUBSIDIARIES } from "../../types/User/User";
+import { SECTORS, SUBSIDIARIES, ROLES } from "../../types/User/User";
 
 export const Users: React.FC = () => {
   const navigate = useNavigate();
@@ -83,6 +83,9 @@ export const Users: React.FC = () => {
   };
 
   const getRoleBadge = (role: string) => {
+    const roleObj = ROLES.find((r) => r.value === role);
+    const label = roleObj?.label || role;
+
     const colors: Record<string, string> = {
       Gerente: "bg-blue-100 text-blue-700",
       Estoquista: "bg-yellow-100 text-yellow-700",
@@ -93,9 +96,11 @@ export const Users: React.FC = () => {
 
     return (
       <span
-        className={`px-3 py-1 text-xs font-semibold rounded-full ${colors[role] || "bg-gray-100 text-gray-700"}`}
+        className={`px-3 py-1 text-xs font-semibold rounded-full ${
+          colors[label] || "bg-gray-100 text-gray-700"
+        }`}
       >
-        {role}
+        {label}
       </span>
     );
   };
@@ -127,7 +132,7 @@ export const Users: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={() => navigate("/dashboard/users/new")}
+          onClick={() => navigate("/users/new")}
           className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition duration-200 shadow-lg"
         >
           <UserPlus className="w-5 h-5" />
@@ -272,7 +277,7 @@ export const Users: React.FC = () => {
                     <td className="px-4 py-3 text-sm text-gray-700">
                       {user.sector}
                     </td>
-                    <td className="px-4 py-3">{getRoleBadge(user.role)}</td>
+                    <td className="px-4 py-3">{getRoleBadge(user.sector)}</td>
                     <td className="px-4 py-3">
                       {getSubsidiaryBadge(user.subsidiary)}
                     </td>
@@ -292,9 +297,7 @@ export const Users: React.FC = () => {
                     <td className="px-4 py-3 text-center">
                       <div className="flex items-center justify-center gap-2">
                         <button
-                          onClick={() =>
-                            navigate(`/dashboard/users/edit/${user.id}`)
-                          }
+                          onClick={() => navigate(`/users/edit/${user.id}`)}
                           className="text-primary-600 hover:text-primary-800 transition"
                           title="Editar"
                         >
